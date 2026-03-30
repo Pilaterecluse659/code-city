@@ -1,4 +1,4 @@
-# Claude City
+# Code City
 
 **Turn any GitHub repo into a 3D city.**
 
@@ -31,7 +31,7 @@ Go to **[claude-city.vercel.app](https://claude-city.vercel.app)** and paste a r
 
 ### Run locally
 ```bash
-git clone https://github.com/Manavarya09/claude-city.git
+git clone https://github.com/Manavarya09/code-city.git
 cd claude-city
 npx serve app
 ```

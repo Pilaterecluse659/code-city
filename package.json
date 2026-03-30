@@ -1,5 +1,5 @@
 {
-  "name": "claude-city",
+  "name": "code-city",
   "version": "2.0.0",
   "description": "Turn any GitHub repo into a stunning 3D city — files become buildings, folders become districts, bugs become fires",
   "scripts": {
@@ -9,7 +9,7 @@
   "keywords": ["3d", "visualization", "threejs", "github", "codebase", "city", "webgl"],
   "author": "Manavarya Singh",
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/Manavarya09/claude-city.git" },
+  "repository": { "type": "git", "url": "https://github.com/Manavarya09/code-city.git" },
   "homepage": "https://claude-city.vercel.app",
   "engines": { "node": ">=16.0.0" }
 }
