@@ -115,7 +115,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 0.8;
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -136,47 +136,66 @@ async function loadData() {
 }
 
 function generateDemoData() {
-  const languages = ['typescript', 'javascript', 'python', 'rust', 'go'];
-  const colors = { typescript: '#3178c6', javascript: '#f7df1e', python: '#3572A5', rust: '#dea584', go: '#00ADD8' };
-  const folders = ['src', 'lib', 'utils', 'api', 'components', 'models', 'services', 'tests'];
+  const languages = ['typescript', 'javascript', 'python', 'rust', 'go', 'java', 'ruby', 'css'];
+  const colors = { typescript: '#3178c6', javascript: '#f7df1e', python: '#3572A5', rust: '#dea584', go: '#00ADD8', java: '#b07219', ruby: '#701516', css: '#563d7c' };
+  const exts = { typescript: '.ts', javascript: '.js', python: '.py', rust: '.rs', go: '.go', java: '.java', ruby: '.rb', css: '.css' };
+  const topFolders = ['src', 'lib', 'api', 'components', 'services', 'models', 'utils', 'hooks', 'tests', 'config', 'middleware', 'controllers', 'views', 'routes', 'workers'];
+  const subFolders = ['auth', 'users', 'payments', 'core', 'common', 'types', 'helpers', 'db', 'cache', 'queue'];
   const tree = [];
 
-  for (const folder of folders) {
-    const files = [];
-    const count = 5 + Math.floor(Math.random() * 15);
-    for (let i = 0; i < count; i++) {
+  for (const folder of topFolders) {
+    const children = [];
+    // Some top folders get sub-folders
+    if (Math.random() > 0.4) {
+      const subs = subFolders.sort(() => Math.random() - 0.5).slice(0, 2 + Math.floor(Math.random() * 4));
+      for (const sub of subs) {
+        const subFiles = [];
+        const count = 3 + Math.floor(Math.random() * 12);
+        for (let i = 0; i < count; i++) {
+          const lang = languages[Math.floor(Math.random() * languages.length)];
+          subFiles.push({
+            name: `${sub}-${i}${exts[lang]}`, type: 'file', path: `${folder}/${sub}/${sub}-${i}${exts[lang]}`,
+            metrics: {
+              loc: 15 + Math.floor(Math.random() * 800), language: lang, color: colors[lang],
+              churn: Math.floor(Math.random() * 40), bug_count: Math.random() > 0.85 ? Math.floor(Math.random() * 5) : 0,
+              last_author: ['manavarya', 'alice', 'bob', 'charlie', 'dave', 'eve'][Math.floor(Math.random() * 6)],
+              is_test: folder === 'tests', age_days: Math.floor(Math.random() * 120)
+            }
+          });
+        }
+        children.push({ name: sub, type: 'directory', path: `${folder}/${sub}`, children: subFiles });
+      }
+    }
+    // Direct files in folder
+    const directCount = 5 + Math.floor(Math.random() * 15);
+    for (let i = 0; i < directCount; i++) {
       const lang = languages[Math.floor(Math.random() * languages.length)];
-      const ext = { typescript: '.ts', javascript: '.js', python: '.py', rust: '.rs', go: '.go' }[lang];
-      files.push({
-        name: `${folder}-${i}${ext}`,
-        type: 'file',
-        path: `${folder}/${folder}-${i}${ext}`,
+      children.push({
+        name: `${folder}-${i}${exts[lang]}`, type: 'file', path: `${folder}/${folder}-${i}${exts[lang]}`,
         metrics: {
-          loc: 20 + Math.floor(Math.random() * 500),
-          language: lang,
-          color: colors[lang],
-          churn: Math.floor(Math.random() * 30),
-          bug_count: Math.random() > 0.8 ? Math.floor(Math.random() * 5) : 0,
-          last_author: ['manavarya', 'alice', 'bob', 'charlie'][Math.floor(Math.random() * 4)],
-          is_test: folder === 'tests',
-          age_days: Math.floor(Math.random() * 90)
+          loc: 10 + Math.floor(Math.random() * 600), language: lang, color: colors[lang],
+          churn: Math.floor(Math.random() * 30), bug_count: Math.random() > 0.8 ? Math.floor(Math.random() * 4) : 0,
+          last_author: ['manavarya', 'alice', 'bob', 'charlie', 'dave', 'eve'][Math.floor(Math.random() * 6)],
+          is_test: folder === 'tests', age_days: Math.floor(Math.random() * 90)
         }
       });
     }
-    tree.push({ name: folder, type: 'directory', path: folder, children: files });
+    tree.push({ name: folder, type: 'directory', path: folder, children });
   }
 
   return {
     name: 'demo-project',
     generated: new Date().toISOString(),
-    stats: { files: 80, directories: 8, loc: 15000, commits: 450, contributors: 4, languages: { typescript: 30, javascript: 20, python: 15, rust: 10, go: 5 }, dependency_edges: 45 },
-    contributors: [{ name: 'manavarya', commits: 200 }, { name: 'alice', commits: 120 }, { name: 'bob', commits: 80 }, { name: 'charlie', commits: 50 }],
+    stats: { files: 350, directories: 50, loc: 85000, commits: 2400, contributors: 6, languages: { typescript: 90, javascript: 60, python: 45, rust: 30, go: 25, java: 40, ruby: 20, css: 40 }, dependency_edges: 120 },
+    contributors: [{ name: 'manavarya', commits: 800 }, { name: 'alice', commits: 500 }, { name: 'bob', commits: 400 }, { name: 'charlie', commits: 300 }, { name: 'dave', commits: 250 }, { name: 'eve', commits: 150 }],
     tree,
     dependencies: [],
     recent_activity: [
-      { file: 'src/auth.ts', author: 'manavarya', type: 'edit', time: new Date().toISOString() },
-      { file: 'api/routes.ts', author: 'alice', type: 'edit', time: new Date().toISOString() },
-      { file: 'lib/db.py', author: 'bob', type: 'edit', time: new Date().toISOString() }
+      { file: 'src/auth/login.ts', author: 'manavarya', type: 'edit', time: new Date().toISOString() },
+      { file: 'api/routes/users.ts', author: 'alice', type: 'edit', time: new Date().toISOString() },
+      { file: 'services/payments/stripe.py', author: 'bob', type: 'edit', time: new Date().toISOString() },
+      { file: 'components/dashboard.tsx', author: 'charlie', type: 'edit', time: new Date().toISOString() },
+      { file: 'workers/queue/processor.go', author: 'dave', type: 'edit', time: new Date().toISOString() },
     ],
     agents: []
   };
