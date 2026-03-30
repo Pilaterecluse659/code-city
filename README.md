@@ -1,53 +1,47 @@
 # Claude City
 
-**Your codebase as a living 3D city.**
+**Turn any GitHub repo into a 3D city.**
 
-Files become buildings. Folders become districts. Bugs become fires. Deploys become rockets. Contributors walk between buildings as animated agents. All rendered in real-time 3D in your browser.
+Paste a repo URL → watch it transform into a navigable 3D cityscape with buildings, districts, fires, and walking characters. 100% client-side, no backend, no signups.
 
-Zero install. Works with any git repo.
+**[Try it live →](https://claude-city.vercel.app)**
 
 ---
 
-## What You See
+## How It Works
 
-- **Buildings** = Files (height = lines of code, color = programming language)
-- **Districts** = Folders (grouped neighborhoods with labels)
-- **Roads** = Dependencies (curved paths connecting related files)
-- **Fires 🔥** = Bugs (particle effects on files with bug-fix commits)
-- **Sparkles ✨** = New features (glowing recently modified files)
-- **Rockets 🚀** = Deploys (launch from the city center)
-- **Agents 🚶** = Contributors (walking between buildings)
-- **Green beacons** = Test files
-- **Window lights** = Tall buildings get illuminated windows
-- **Stars** = Night sky with twinkling starfield
+| Code | City |
+|------|------|
+| Files | Buildings (height = lines of code) |
+| Folders | Districts with labels |
+| Languages | Building colors (blue = TypeScript, yellow = JS...) |
+| Dependencies | Roads connecting buildings |
+| Bug-fix commits | Fires on buildings |
+| Recent changes | Glowing buildings |
+| Contributors | Walking characters |
+
+Paste any public GitHub repo and the city builds itself using the GitHub API — no cloning, no backend, no API keys needed.
 
 ---
 
 ## Quick Start
 
-### Standalone (any git repo)
+### Use the website
+Go to **[claude-city.vercel.app](https://claude-city.vercel.app)** and paste a repo.
+
+### Run locally
 ```bash
 git clone https://github.com/Manavarya09/claude-city.git
 cd claude-city
-node scripts/analyze.js /path/to/your/repo
-node scripts/server.js
+npx serve app
 ```
-Opens in your browser at `http://localhost:3333`
+Open `http://localhost:3000`
 
-### Claude Code Plugin
-```bash
-git clone https://github.com/Manavarya09/claude-city.git ~/.claude/plugins/claude-city
+### Direct links
 ```
-Then in any project:
+https://claude-city.vercel.app?repo=facebook/react
+https://claude-city.vercel.app?repo=vercel/next.js
 ```
-/city
-```
-
-### Demo Mode (no repo needed)
-```bash
-node scripts/server.js
-```
-Auto-generates a demo city if no data file exists.
 
 ---
 
@@ -55,125 +49,97 @@ Auto-generates a demo city if no data file exists.
 
 | Action | Control |
 |--------|---------|
-| Rotate | Click + drag |
-| Zoom | Scroll wheel |
-| Pan | Right-click + drag |
-| Inspect building | Hover |
-| Zoom to building | Click |
-| Reset camera | Press `R` or 📷 button |
-| Toggle fires | 🔥 button |
-| Toggle roads | 🛣️ button |
-| Launch rocket | 🚀 button |
-
----
-
-## How Buildings Are Generated
-
-| Code Concept | City Element | Visual Property |
-|---|---|---|
-| File | Building | 3D box |
-| Lines of code | Building height | Y scale |
-| Language | Building color | Material color |
-| Folder | District | Grouped area with label |
-| Import/require | Road | Curved line between buildings |
-| Bug-fix commits | Fire | Particle effect |
-| Recent changes | Sparkle | Glowing emissive material |
-| Test file | Green beacon | Sphere on top |
-| Contributor | Agent | Walking character |
-
-### Language Colors
-
-| Language | Color |
-|----------|-------|
-| TypeScript | 🔵 Blue |
-| JavaScript | 🟡 Yellow |
-| Python | 🔵 Dark Blue |
-| Rust | 🟠 Orange |
-| Go | 🔵 Cyan |
-| Java | 🟤 Brown |
-| Ruby | 🔴 Red |
-| HTML | 🟠 Orange-Red |
-| CSS | 🟣 Purple |
+| Rotate | Drag |
+| Zoom | Scroll |
+| Pan | Right-click drag |
+| Inspect | Hover building |
+| Focus | Click building |
+| Reset | Press R |
+| Rocket | 🚀 button |
 
 ---
 
 ## Tech Stack
 
-- **Three.js** — 3D rendering (loaded from CDN, no build step)
-- **Node.js** — Git analysis and local server
-- **D3-inspired treemap** — City layout algorithm
-- **Zero dependencies** — No npm install needed
+- **Three.js** — 3D rendering (CDN, zero build step)
+- **GitHub REST API** — Fetches file tree, contributors, languages, commits
+- **Vercel** — Hosting (static site)
+- **Zero dependencies** — No npm install, no build, no backend
+
+---
+
+## Contributing
+
+This project needs help! Here's what I want to build but can't do alone:
+
+### High Priority
+- [ ] **Better building shapes** — Not just boxes. Cylinders, L-shapes, pyramids for variety
+- [ ] **Day/night toggle** — Switch between sunset and midnight cyberpunk mode
+- [ ] **Time travel slider** — See how the city grew over commit history
+- [ ] **Click building → open file** — Link buildings to GitHub file URLs
+
+### Medium Priority
+- [ ] **Performance for huge repos** — Linux kernel, chromium (10K+ files)
+- [ ] **Shareable screenshots** — One-click export to PNG/video
+- [ ] **Mobile support** — Touch controls, responsive layout
+- [ ] **Private repos** — OAuth flow for GitHub token
+- [ ] **Minimap** — Small 2D overview in corner
+
+### Would Be Insane
+- [ ] **Multiplayer** — See other people's cursors flying around
+- [ ] **VR mode** — Walk through your codebase in WebXR
+- [ ] **Sound** — Lo-fi beats + ambient city sounds
+- [ ] **Terrain** — Hills and rivers based on code complexity
+- [ ] **Weather** — Rain when tests fail, sunshine when CI passes
+
+### How to Contribute
+1. Fork the repo
+2. Pick an issue or idea from above
+3. `npx serve app` to run locally
+4. Open a PR
+
+No build step. No npm install. Just edit the JS files in `app/` and refresh.
 
 ---
 
 ## Architecture
 
 ```
-Your Git Repo
-    │
-    ▼
-┌─────────────┐
-│ analyze.js  │  Parses git log, file tree, dependencies
-│             │  Outputs city-data.json
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ server.js   │  Serves the 3D app on localhost
-└──────┬──────┘
-       │
-       ▼
-┌─────────────────────────────────────────┐
-│              index.html                  │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐│
-│  │ city.js  │ │agents.js │ │effects.js││
-│  │Buildings │ │Walking   │ │Fire,     ││
-│  │Districts │ │sprites   │ │sparkles, ││
-│  │Roads     │ │paths     │ │rockets   ││
-│  └──────────┘ └──────────┘ └──────────┘│
-│  ┌──────────────────────────────────────┤
-│  │         controls.js                  │
-│  │  Camera, UI overlay, tooltips        │
-│  └──────────────────────────────────────┤
-└─────────────────────────────────────────┘
+app/
+├── index.html      # Landing page + Three.js app entry
+├── city.js         # Building generation, treemap layout
+├── agents.js       # Walking character sprites
+├── effects.js      # Fire, sparkles, rockets, atmosphere
+├── controls.js     # Camera, UI overlay, tooltips
+└── github-api.js   # GitHub API client (no backend needed)
 ```
 
----
-
-## Requirements
-
-- Node.js (16+)
-- A modern browser (Chrome, Firefox, Safari, Edge)
-- A git repository to visualize
+Everything runs in the browser. The GitHub API is called directly from the client. No server, no database, no auth (for public repos).
 
 ---
 
-## FAQ
+## Supported Input Formats
 
-**Q: How many files can it handle?**
-A: Tested with 5000+ files at 60fps. Uses InstancedMesh and geometry merging for performance.
-
-**Q: Does it work with non-JavaScript projects?**
-A: Yes. Supports TypeScript, Python, Rust, Go, Java, Ruby, PHP, Swift, C/C++, and more.
-
-**Q: Can I share my city?**
-A: Screenshot it! The dark theme with glowing buildings makes great social media content.
-
-**Q: Does it need a build step?**
-A: No. Three.js is loaded from CDN via import maps. Just run the server.
+All of these work:
+- `facebook/react`
+- `https://github.com/facebook/react`
+- `https://github.com/facebook/react.git`
+- `github.com/facebook/react/`
 
 ---
 
-## Also By Me
+## Rate Limits
 
-- **[Cost Guardian](https://github.com/Manavarya09/cost-guardian)** — Real-time cost tracking for Claude Code
-- **[Team Brain](https://github.com/Manavarya09/team-brain)** — Git-native shared AI memory for teams
+GitHub API allows 60 requests/hour without auth. For heavier usage, add a personal access token:
+1. Create token at [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Open browser console → `localStorage.setItem('gh_token', 'your_token_here')`
+3. Rate limit increases to 5000/hour
 
 ---
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT — See [LICENSE](LICENSE)
 
 ---
 

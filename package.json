@@ -1,17 +1,15 @@
 {
   "name": "claude-city",
-  "version": "1.0.0",
-  "description": "Your codebase as a living 3D city — files become buildings, folders become districts, bugs become fires",
-  "main": "scripts/analyze.js",
+  "version": "2.0.0",
+  "description": "Turn any GitHub repo into a stunning 3D city — files become buildings, folders become districts, bugs become fires",
   "scripts": {
-    "analyze": "node scripts/analyze.js",
-    "start": "node scripts/server.js",
-    "city": "node scripts/analyze.js . && node scripts/server.js"
+    "dev": "npx serve app -l 3333",
+    "start": "npx serve app -l 3333"
   },
-  "keywords": ["claude-code", "3d", "visualization", "threejs", "codebase", "city", "git"],
+  "keywords": ["3d", "visualization", "threejs", "github", "codebase", "city", "webgl"],
   "author": "Manavarya Singh",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/Manavarya09/claude-city.git" },
-  "homepage": "https://github.com/Manavarya09/claude-city#readme",
+  "homepage": "https://claude-city.vercel.app",
   "engines": { "node": ">=16.0.0" }
 }
